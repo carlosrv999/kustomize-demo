@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  labels:
+    app: app
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: app
+        tier: frontend
+    spec:
+      containers:
+        - image: app-sample:latest
+          name: php-fpm
+          volumeMounts:
+            - name: php-ini
+              mountPath: /usr/local/etc/php/php.ini
+              subPath: php.ini
+      volumes:
+        - name: php-ini
+          configMap:
+            name: php-ini
+            items:
+              - key: php.ini
+                path: php.ini

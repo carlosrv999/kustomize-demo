@@ -1,0 +1,12 @@
+---
+namespace: development
+resources:
+  - ../../base
+images:
+  - name: app-sample
+    newName: app-sample-dev
+    newTag: v1.0
+configMapGenerator:
+  - name: php-ini
+    files:
+      - php.ini=serverconfig/php.ini
